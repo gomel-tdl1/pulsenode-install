@@ -78,8 +78,8 @@ if [ "$CC_CLIENT" = "lighthouse" ]; then
         --http-allow-sync-stalled \
         --execution-jwt=/secrets/jwtsecret \
         --always-prefer-builder-payload \
-        --historic-state-cache-size 2 \
         $BN_ADDITIONAL_FLAGS"
+    # --historic-state-cache-size 2 \
 
     # Performance tuning for ARM systems
     UNAME_VAL=$(uname -m)
