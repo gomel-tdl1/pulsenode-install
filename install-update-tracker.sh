@@ -102,9 +102,9 @@ done
 
 # Get package files URL
 if [ "$PACKAGE_VERSION" = "latest" ]; then
-    PACKAGE_URL="https://github.com/rocket-pool/smartnode-install/releases/latest/download/rp-update-tracker.tar.xz"
+    PACKAGE_URL="https://github.com/RedDuck-Software/smartnode-install/releases/latest/download/rp-update-tracker.tar.xz"
 else
-    PACKAGE_URL="https://github.com/rocket-pool/smartnode-install/releases/download/$PACKAGE_VERSION/rp-update-tracker.tar.xz"
+    PACKAGE_URL="https://github.com/RedDuck-Software/smartnode-install/releases/download/$PACKAGE_VERSION/rp-update-tracker.tar.xz"
 fi
 
 
