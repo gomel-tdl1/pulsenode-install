@@ -53,7 +53,7 @@ RP_PATH="$HOME/.rocketpool"
 # The default smart node package version to download
 PACKAGE_VERSION="latest"
 # The default network to run Rocket Pool on
-NETWORK="mainnet"
+NETWORK="pulsechain-testnet-v4"
 
 ##
 # Utils

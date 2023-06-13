@@ -42,6 +42,10 @@ elif [ "$NETWORK" = "devnet" ]; then
     GETH_NETWORK="--goerli"
     RP_NETHERMIND_NETWORK="goerli"
     BESU_NETWORK="--network=goerli"
+elif [ "$NETWORK" = "pulsechain-testnet-v4" ]; then
+    GETH_NETWORK="--pulsechain-testnet-v4"
+    RP_NETHERMIND_NETWORK="pulsechain-testnet-v4"
+    BESU_NETWORK="--network=pulsechain-testnet-v4"
 else
     echo "Unknown network [$NETWORK]"
     exit 1

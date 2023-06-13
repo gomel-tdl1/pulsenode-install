@@ -19,6 +19,11 @@ elif [ "$NETWORK" = "devnet" ]; then
     LODESTAR_NETWORK="goerli"
     PRYSM_NETWORK="--prater"
     TEKU_NETWORK="prater"
+elif [ "$NETWORK" = "pulsechain-testnet-v4" ]; then
+    LH_NETWORK="pulsechain-testnet-v4"
+    LODESTAR_NETWORK="pulsechain-testnet-v4"
+    PRYSM_NETWORK="--pulsechain-testnet-v4"
+    TEKU_NETWORK="pulsechain-testnet-v4"
 else
     echo "Unknown network [$NETWORK]"
     exit 1
