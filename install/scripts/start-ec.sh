@@ -80,7 +80,7 @@ if [ "$CLIENT" = "geth" ]; then
             --http \
             --http.addr 0.0.0.0 \
             --http.port ${EC_HTTP_PORT:-8545} \
-            --http.api eth,net,web3 \
+            --http.api eth,net,web3,admin \
             --http.corsdomain=* \
             --ws \
             --ws.addr 0.0.0.0 \
