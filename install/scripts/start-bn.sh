@@ -63,7 +63,7 @@ fi
 # Lighthouse startup
 if [ "$CC_CLIENT" = "lighthouse" ]; then
 
-    CMD="$PERF_PREFIX /usr/local/bin/lighthouse beacon \
+    CMD="$PERF_PREFIX /usr/local/bin/lighthouse beacon_node \
         --network $LH_NETWORK \
         --datadir /ethclient/lighthouse \
         --port $BN_P2P_PORT \
@@ -78,6 +78,7 @@ if [ "$CC_CLIENT" = "lighthouse" ]; then
         --http-allow-sync-stalled \
         --execution-jwt=/secrets/jwtsecret \
         --always-prefer-builder-payload \
+        --checkpoint-sync-url=https://checkpoint.v4.testnet.pulsechain.com \
         $BN_ADDITIONAL_FLAGS"
     # --historic-state-cache-size 2 \
 
