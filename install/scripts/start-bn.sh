@@ -78,7 +78,6 @@ if [ "$CC_CLIENT" = "lighthouse" ]; then
         --http-allow-sync-stalled \
         --execution-jwt=/secrets/jwtsecret \
         --always-prefer-builder-payload \
-        --checkpoint-sync-url=https://checkpoint.v4.testnet.pulsechain.com \
         $BN_ADDITIONAL_FLAGS"
     # --historic-state-cache-size 2 \
 
