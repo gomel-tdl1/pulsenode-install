@@ -27,7 +27,7 @@ build_cli() {
     cd smartnode || fail "Directory ${PWD}/smartnode/rocketpool-cli does not exist or you don't have permissions to access it."
 
     echo -n "Building CLI binaries... "
-    docker run --rm -v $PWD:/smartnode rocketpool/smartnode-builder:latest /smartnode/rocketpool-cli/build.sh || fail "Error building CLI binaries."
+    docker run --rm -v $PWD:/smartnode m00nler/smartnode-builder:latest /smartnode/rocketpool-cli/build.sh || fail "Error building CLI binaries."
     mv rocketpool-cli/rocketpool-cli-* ../$VERSION
     echo "done!"
 
@@ -66,13 +66,13 @@ build_daemon() {
     echo "done!"
 
     echo "Building Docker Smartnode image..."
-    docker buildx build --platform=linux/amd64 -t rocketpool/smartnode:$VERSION-amd64 -f docker/rocketpool-dockerfile --load . || fail "Error building amd64 Docker Smartnode image."
-    docker buildx build --platform=linux/arm64 -t rocketpool/smartnode:$VERSION-arm64 -f docker/rocketpool-dockerfile --load . || fail "Error building arm64 Docker Smartnode image."
+    docker buildx build --platform=linux/amd64 -t m00nler/smartnode:$VERSION-amd64 -f docker/rocketpool-dockerfile --load . || fail "Error building amd64 Docker Smartnode image."
+    docker buildx build --platform=linux/arm64 -t m00nler/smartnode:$VERSION-arm64 -f docker/rocketpool-dockerfile --load . || fail "Error building arm64 Docker Smartnode image."
     echo "done!"
 
     echo -n "Pushing to Docker Hub... "
-    docker push rocketpool/smartnode:$VERSION-amd64 || fail "Error pushing amd64 Docker Smartnode image to Docker Hub."
-    docker push rocketpool/smartnode:$VERSION-arm64 || fail "Error pushing arm Docker Smartnode image to Docker Hub."
+    docker push m00nler/smartnode:$VERSION-amd64 || fail "Error pushing amd64 Docker Smartnode image to Docker Hub."
+    docker push m00nler/smartnode:$VERSION-arm64 || fail "Error pushing arm Docker Smartnode image to Docker Hub."
     rm -f rocketpool/rocketpool-daemon-*
     echo "done!"
     
@@ -85,13 +85,13 @@ build_docker_prune_provision() {
     cd smartnode || fail "Directory ${PWD}/smartnode does not exist or you don't have permissions to access it."
 
     echo "Building Docker Prune Provisioner image..."
-    docker buildx build --platform=linux/amd64 -t rocketpool/smartnode:$VERSION-amd64 -f docker/rocketpool-prune-provision --load . || fail "Error building amd64 Docker Prune Provision  image."
-    docker buildx build --platform=linux/arm64 -t rocketpool/smartnode:$VERSION-arm64 -f docker/rocketpool-prune-provision --load . || fail "Error building arm64 Docker Prune Provision  image."
+    docker buildx build --platform=linux/amd64 -t m00nler/smartnode:$VERSION-amd64 -f docker/rocketpool-prune-provision --load . || fail "Error building amd64 Docker Prune Provision  image."
+    docker buildx build --platform=linux/arm64 -t m00nler/smartnode:$VERSION-arm64 -f docker/rocketpool-prune-provision --load . || fail "Error building arm64 Docker Prune Provision  image."
     echo "done!"
 
     echo -n "Pushing to Docker Hub... "
-    docker push rocketpool/eth1-prune-provision:$VERSION-amd64 || fail "Error pushing amd64 Docker Prune Provision image to Docker Hub."
-    docker push rocketpool/eth1-prune-provision:$VERSION-arm64 || fail "Error pushing arm Docker Prune Provision image to Docker Hub."
+    docker push m00nler/eth1-prune-provision:$VERSION-amd64 || fail "Error pushing amd64 Docker Prune Provision image to Docker Hub."
+    docker push m00nler/eth1-prune-provision:$VERSION-arm64 || fail "Error pushing arm Docker Prune Provision image to Docker Hub."
     echo "done!"
     
     cd ..
@@ -102,11 +102,11 @@ build_docker_prune_provision() {
 build_docker_manifest() {
     echo -n "Building Docker manifest... "
     rm -f ~/.docker/manifests/docker.io_rocketpool_smartnode-$VERSION
-    docker manifest create rocketpool/smartnode:$VERSION --amend rocketpool/smartnode:$VERSION-amd64 --amend rocketpool/smartnode:$VERSION-arm64
+    docker manifest create m00nler/smartnode:$VERSION --amend m00nler/smartnode:$VERSION-amd64 --amend m00nler/smartnode:$VERSION-arm64
     echo "done!"
 
     echo -n "Pushing to Docker Hub... "
-    docker manifest push --purge rocketpool/smartnode:$VERSION
+    docker manifest push --purge m00nler/smartnode:$VERSION
     echo "done!"
 }
 
@@ -115,11 +115,11 @@ build_docker_manifest() {
 build_latest_docker_manifest() {
     echo -n "Building 'latest' Docker manifest... "
     rm -f ~/.docker/manifests/docker.io_rocketpool_smartnode-latest
-    docker manifest create rocketpool/smartnode:latest --amend rocketpool/smartnode:$VERSION-amd64 --amend rocketpool/smartnode:$VERSION-arm64
+    docker manifest create m00nler/smartnode:latest --amend m00nler/smartnode:$VERSION-amd64 --amend m00nler/smartnode:$VERSION-arm64
     echo "done!"
 
     echo -n "Pushing to Docker Hub... "
-    docker manifest push --purge rocketpool/smartnode:latest
+    docker manifest push --purge m00nler/smartnode:latest
     echo "done!"
 }
 
@@ -128,11 +128,11 @@ build_latest_docker_manifest() {
 build_docker_prune_provision_manifest() {
     echo -n "Building Docker Prune Provision manifest... "
     rm -f ~/.docker/manifests/docker.io_rocketpool_eth1-prune-provision-$VERSION
-    docker manifest create rocketpool/eth1-prune-provision:$VERSION --amend rocketpool/eth1-prune-provision:$VERSION-amd64 --amend rocketpool/eth1-prune-provision:$VERSION-arm64
+    docker manifest create m00nler/eth1-prune-provision:$VERSION --amend m00nler/eth1-prune-provision:$VERSION-amd64 --amend m00nler/eth1-prune-provision:$VERSION-arm64
     echo "done!"
 
     echo -n "Pushing to Docker Hub... "
-    docker manifest push --purge rocketpool/eth1-prune-provision:$VERSION
+    docker manifest push --purge m00nler/eth1-prune-provision:$VERSION
     echo "done!"
 }
 
@@ -164,6 +164,7 @@ ARCH=""
 case $UNAME_VAL in
     x86_64)  ARCH="amd64" ;;
     aarch64) ARCH="arm64" ;;
+    arm64) ARCH="arm64" ;;
     *)       fail "CPU architecture not supported: $UNAME_VAL" ;;
 esac
 
